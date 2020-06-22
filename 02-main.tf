@@ -37,7 +37,7 @@ resource "azurerm_app_service" "service" {
 
 resource "null_resource" "example2" {
   provisioner "local-exec" {
-    command = "az account show"
+    command = "echo ${var.PREFIX} - ${var.AZURE_CLIENT_ID}"
   }
 }
 
