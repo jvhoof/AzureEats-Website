@@ -37,19 +37,19 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve
 
-    - uses: azure/login@v1
-      with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-
-    - name: Azure CLI script
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az account show
-          az webapp deployment source config \
-            --branch $BRANCH \
-            --manual-integration \
-            --name "$TF_VAR_PREFIX-SERVICE" \
-            --repo-url "https://github.com/jvhoof/AzureEats-Website" \
-            --resource-group "$TF_VAR_PREFIX-RG"
-          echo "$BRANCH - $TF_VAR_PREFIX"
+#    - uses: azure/login@v1
+#      with:
+#        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+#
+#    - name: Azure CLI script
+#      uses: azure/CLI@v1
+#      with:
+#        inlineScript: |
+#          az account show
+#          az webapp deployment source config \
+#            --branch $BRANCH \
+#            --manual-integration \
+#            --name "$TF_VAR_PREFIX-SERVICE" \
+#            --repo-url "https://github.com/jvhoof/AzureEats-Website" \
+#            --resource-group "$TF_VAR_PREFIX-RG"
+#          echo "$BRANCH - $TF_VAR_PREFIX"
