@@ -46,4 +46,10 @@ jobs:
       with:
         inlineScript: |
           az account show
-          echo "$BRANCH - $PREFIX"
+          az webapp deployment source config \
+            --branch $BRANCH \
+            --manual-integration \
+            --name "$TF_VAR_PREFIX-SERVICE" \
+            --repo-url "https://github.com/jvhoof/AzureEats-Website" \
+            --resource-group "$TF_VAR_PREFIX-RG"
+          echo "$BRANCH - $TF_VAR_PREFIX"
