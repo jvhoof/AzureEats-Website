@@ -38,8 +38,6 @@ resource "azurerm_app_service" "service" {
 resource "null_resource" "example2" {
   provisioner "local-exec" {
     command = <<EOT
-    az account set --subscription ${var.AZURE_SUBSCRIPTION_ID}
-    az login --service-principal --username "${var.AZURE_CLIENT_ID}" --password "${var.AZURE_CLIENT_SECRET}" --tenant "${var.AZURE_TENANT_ID}"
     az webapp deployment source config --resource-group ${azurerm_resource_group.rg.name} --branch "${var.BRANCH}" --name ${azurerm_app_service.service.name} --repo-url "${var.REPOURL}"
     EOT
   }
@@ -49,3 +47,4 @@ resource "null_resource" "example2" {
   ]
 }
 
+#az login --service-principal --username "${var.AZURE_CLIENT_ID}" --password "${var.AZURE_CLIENT_SECRET}" --tenant "${var.AZURE_TENANT_ID}"
