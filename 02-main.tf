@@ -39,6 +39,8 @@ resource "null_resource" "example2" {
   provisioner "local-exec" {
     command = <<EOT
     az account show
+    echo "--> ${azurerm_resource_group.rg.name}"
+    echo "--> ${azurerm_app_service.service.name}"
     EOT
   }
 
