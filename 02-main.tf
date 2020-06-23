@@ -41,6 +41,7 @@ resource "null_resource" "example2" {
     az account show
     echo "--> ${azurerm_resource_group.rg.name}"
     echo "--> ${azurerm_app_service.service.name}"
+    az webapp deployment source config --resource-group "${azurerm_resource_group.rg.name}" --branch "${var.BRANCH}" --manual-integration --name ${azurerm_app_service.service.name} --repo-url "${var.REPOURL}"
     EOT
   }
 
