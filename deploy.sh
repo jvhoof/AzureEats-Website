@@ -9,14 +9,6 @@ echo "
 # Stop running when command returns error
 set -e
 
-##############################################################################################################
-# Azure Service Principal
-##############################################################################################################
-# export AZURERM_CLIENT_ID=''
-# export AZURERM_CLIENT_SECRET=''
-# export AZURERM_SUBSCRIPTION_ID=''
-# export AZURERM_TENANT_ID=''
-
 if [ -z "$DEPLOY_LOCATION" ]
 then
     # Input location
@@ -83,6 +75,7 @@ then
 fi
 
 cd ../
+URL=`terraform output app_service_url`
 echo "
 ##############################################################################################################
 #
@@ -90,6 +83,7 @@ echo "
 
  Deployment information:
 
+website is available on the following URL: https://$URL
 
 ##############################################################################################################
 "

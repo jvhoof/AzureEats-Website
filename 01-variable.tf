@@ -18,19 +18,7 @@ variable "BRANCH" {
 }
 
 variable "REPOURL" {
-  default = "https://github.com/jvhoof/AzureEats-Website"
-}
-
-##############################################################################################################
-# Azure Service Principal used by Terraform and local-exec
-##############################################################################################################
-variable "AZURE_CLIENT_ID" {
-}
-variable "AZURE_CLIENT_SECRET" {
-}
-variable "AZURE_SUBSCRIPTION_ID" {
-}
-variable "AZURE_TENANT_ID" {
+  default = "https://github.com/Terraform-On-Azure-Workshop/AzureEats-Website"
 }
 
 ##############################################################################################################
@@ -44,11 +32,6 @@ terraform {
 # Terraform Microsoft Azure Provider
 ##############################################################################################################
 provider "azurerm" {
-  version         = ">= 2.0.0"
-  subscription_id = var.AZURE_SUBSCRIPTION_ID
-  client_id       = var.AZURE_CLIENT_ID
-  client_secret   = var.AZURE_CLIENT_SECRET
-  tenant_id       = var.AZURE_TENANT_ID
-
+  version = ">= 2.0.0"
   features {}
 }
