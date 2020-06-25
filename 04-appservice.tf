@@ -16,12 +16,18 @@ resource "azurerm_app_service" "service" {
   app_service_plan_id = azurerm_app_service_plan.plan.id
 
   site_config {
+    always_on           = true
+    default_documents   = [
+      "Default.htm",
+      "Default.html",
+      "hostingstart.html"
+    ]
   }
 
   app_settings = {
     "WEBSITE_NODE_DEFAULT_VERSION" = "10.15.2"
-    "ApiUrl"                       = ""
-    "ApiUrlShoppingCart"           = ""
+    "ApiUrl"                       = "/api/v1"
+    "ApiUrlShoppingCart"           = "/api/v1"
     "MongoConnectionString"        = "mongodb://${var.USERNAME}:${var.PASSWORD}@${azurerm_container_group.aci.fqdn}:27017"
     "SqlConnectionString"          = "Server=tcp:${azurerm_sql_server.sqlserver.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_sql_database.sqldatabase.name};Persist Security Info=False;User ID=${var.USERNAME};Password=${var.PASSWORD};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"
     "productImagesUrl"             = "https://raw.githubusercontent.com/microsoft/TailwindTraders-Backend/master/Deploy/tailwindtraders-images/product-detail"

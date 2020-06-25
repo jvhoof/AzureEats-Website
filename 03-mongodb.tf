@@ -7,10 +7,10 @@ resource "azurerm_container_group" "aci" {
   os_type             = "Linux"
 
   container {
-    name   = "hello-world"
+    name   = "mongodb"
     image  = "mongo:latest"
-    cpu    = "0.5"
-    memory = "1.5"
+    cpu    = "1"
+    memory = "2"
 
     ports {
      port     = 27017
