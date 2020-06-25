@@ -35,7 +35,7 @@ resource "azurerm_sql_database" "sqldatabase" {
 
 # Allow Azure services to acccess the Azure SQL DB
 resource "azurerm_sql_firewall_rule" "sqlfirewall" {
-    name                = "${var.prefix}-sqlfirewall"
+    name                = "${var.PREFIX}-sqlfirewall"
     resource_group_name = azurerm_resource_group.rg.name
     server_name         = azurerm_sql_server.sqlserver.name
     start_ip_address    = "0.0.0.0"
