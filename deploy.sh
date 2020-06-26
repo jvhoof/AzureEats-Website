@@ -45,7 +45,7 @@ export TF_VAR_PREFIX="$prefix"
 echo ""
 echo "--> Using prefix $prefix for all resources ..."
 echo ""
-rg_cgf="$prefix-RG"
+rg="$prefix-RG"
 
 if [ -z "$DEPLOY_USERNAME" ]
 then
@@ -110,6 +110,16 @@ then
 fi
 
 cd ../
+
+AKS= "$PREFIX-aks1"
+
+az aks get-credentials --name $AKS --resource-group $rg
+
+# Required in chart (error seen with kubectl get events -w)
+#kubectl create serviceaccount ttsa
+
+helm upgrade --install tailwindtraders ./Deploy/helm/web -f ./Deploy/helm/gvalues.yaml -f ./Deploy/helm/values.b2c.yaml  --set ingress.hosts={$AKS}  --set ingress.protocol=http --set image.repository=jvh01/tailwindtraders-jvh --set image.tag=latest
+
 echo "
 ##############################################################################################################
 #
